@@ -8,6 +8,7 @@ FLAVORS := dev qa staging uat prod
 
 .DEFAULT_GOAL := help
 .PHONY: help setup env get gen watch l10n format format-check analyze test \
+        feature \
         coverage check icons clean run-dev run-qa run-staging run-uat run-prod \
         build-apk build-appbundle build-ipa build-ios-nosign integration
 
@@ -53,6 +54,10 @@ coverage: ## Run tests with coverage (coverage/lcov.info)
 	$(FLUTTER) test --coverage
 
 check: format-check analyze test ## What CI runs (after gen)
+
+feature: ## Scaffold a feature: make feature NAME=orders [ENTITY=order]
+	@[ -n "$(NAME)" ] || { echo "usage: make feature NAME=orders [ENTITY=order]"; exit 1; }
+	tool/new_feature.sh $(NAME) $(if $(ENTITY),--entity $(ENTITY))
 
 icons: ## Regenerate launcher icons for every flavor
 	$(DART) run flutter_launcher_icons

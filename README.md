@@ -190,7 +190,18 @@ docs/                         # ARCHITECTURE.md, RENAMING.md
 
 ## How to add a new feature
 
-Use `features/example` as the template. For a feature called `orders`:
+**Quick way:** generate the whole slice with one command.
+
+```bash
+make feature NAME=orders ENTITY=order      # or: tool/new_feature.sh orders --entity order
+```
+
+This creates every layer below (entity, model, remote data source, repository, use case, bloc, page, widget, DI and a
+bloc test). It also registers the feature in `initDependencies()`, adds a `/orders` route and runs codegen. Then
+replace the placeholder fields marked `TODO(orders)`, set the API path, and run `make check`. Use `--no-wire` to skip
+the DI and router changes.
+
+**By hand:** use `features/example` as the template. For a feature called `orders`:
 
 1. **Folders:** create `lib/features/orders/{data/{datasources,models,repositories},domain/{entities,repositories,usecases},presentation/{bloc,pages,widgets}}`
    and the same tree under `test/features/orders/`.
