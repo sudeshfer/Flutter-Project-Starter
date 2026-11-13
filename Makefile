@@ -8,7 +8,7 @@ FLAVORS := dev qa staging uat prod
 
 .DEFAULT_GOAL := help
 .PHONY: help setup env get gen watch l10n format format-check analyze test \
-        feature \
+        feature usecase bump version \
         coverage check icons clean run-dev run-qa run-staging run-uat run-prod \
         build-apk build-appbundle build-ipa build-ios-nosign integration
 
@@ -58,6 +58,16 @@ check: format-check analyze test ## What CI runs (after gen)
 feature: ## Scaffold a feature: make feature NAME=orders [ENTITY=order]
 	@[ -n "$(NAME)" ] || { echo "usage: make feature NAME=orders [ENTITY=order]"; exit 1; }
 	tool/new_feature.sh $(NAME) $(if $(ENTITY),--entity $(ENTITY))
+
+usecase: ## Add a use case: make usecase FEATURE=orders NAME=create_order [RETURNS=Order] [NO_PARAMS=1]
+	@[ -n "$(FEATURE)" ] && [ -n "$(NAME)" ] || { echo "usage: make usecase FEATURE=orders NAME=create_order [RETURNS=Order] [NO_PARAMS=1]"; exit 1; }
+	tool/add_usecase.sh $(FEATURE) $(NAME) $(if $(RETURNS),--returns "$(RETURNS)") $(if $(NO_PARAMS),--no-params)
+
+version: ## Print the current app version
+	@sed -n "s/^version: *//p" pubspec.yaml
+
+bump: ## Bump version: make bump PART=patch|minor|major|build|X.Y.Z [TAG=1]
+	tool/bump_version.sh $(or $(PART),patch) $(if $(TAG),--tag)
 
 icons: ## Regenerate launcher icons for every flavor
 	$(DART) run flutter_launcher_icons

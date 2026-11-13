@@ -121,6 +121,22 @@ fvm flutter build ipa --release --flavor prod -t lib/main_prod.dart --dart-defin
 
 Every build needs `--flavor`. iOS has no plain `Runner` scheme, and Android has no unflavored variant.
 
+### Versioning
+
+The app version is `version: X.Y.Z+BUILD` in `pubspec.yaml`. Bump it before every store upload:
+
+```bash
+make version             # print the current version
+make bump PART=build     # 1.0.0+1 -> 1.0.0+2   (another upload of the same release)
+make bump PART=patch     # 1.0.0+1 -> 1.0.1+2   (default if PART is omitted)
+make bump PART=minor     # 1.0.0+1 -> 1.1.0+2
+make bump PART=major     # 1.0.0+1 -> 2.0.0+2
+make bump PART=2.3.0     # set an exact version; build number still increments
+make bump PART=patch TAG=1   # also commit pubspec.yaml and create tag v1.0.1+2
+```
+
+The build number always goes up, because both stores reject an upload that reuses one.
+
 ## Code generation
 
 Generated files (`*.freezed.dart`, `*.g.dart`, `lib/core/l10n/gen/`) are **not committed**. Regenerate them after
@@ -226,3 +242,17 @@ the DI and router changes.
 13. **Tests:** model JSON, repository success/failure mapping, use case, `blocTest` for every event/state path,
     and a widget test with a `MockBloc`.
 14. Run `make check`, then open a PR to `develop`.
+
+### Adding a use case to an existing feature
+
+```bash
+make usecase FEATURE=orders NAME=create_order                       # returns Unit, with CreateOrderParams
+make usecase FEATURE=orders NAME=search_orders RETURNS='List<Order>'
+make usecase FEATURE=orders NAME=get_order_count RETURNS=int NO_PARAMS=1
+```
+
+This creates the use case (plus a `Params` class unless `NO_PARAMS=1`) and adds the matching method to the
+repository contract, the repository impl (with `ErrorMapper` error handling) and the remote data source. It also
+registers the use case in `orders_injection.dart` and creates a use case test. Then fill in the params and the API
+call (marked `TODO`) and use the use case from your bloc. If any file isn't in the expected shape, nothing is
+changed.
