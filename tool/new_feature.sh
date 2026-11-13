@@ -41,6 +41,36 @@ PKG="$(sed -n 's/^name: *//p' pubspec.yaml | head -1)"
 DIR="lib/features/$FEAT"
 [[ -e "$DIR" ]] && die "$DIR already exists"
 
+# ---------------------------------------------------------------- preflight
+# Fail before writing anything if this project doesn't have what the templates rely on.
+MISSING=()
+for f in lib/core/utils/typedefs.dart lib/core/usecase/usecase.dart lib/core/error/exceptions.dart \
+         lib/core/error/error_mapper.dart lib/core/error/failure.dart lib/core/network/network_info.dart \
+         lib/core/extensions/context_extensions.dart lib/shared/widgets/app_loader.dart \
+         lib/shared/widgets/empty_view.dart lib/shared/widgets/error_view.dart; do
+  [[ -f "$f" ]] || MISSING+=("$f")
+done
+for p in freezed_annotation flutter_bloc bloc_concurrency fpdart dio get_it build_runner freezed \
+         json_serializable bloc_test mocktail; do
+  grep -qE "^  $p:" pubspec.yaml || MISSING+=("pubspec dependency: $p")
+done
+if [[ $WIRE -eq 1 ]]; then
+  grep -q 'await sl.allReady();' lib/app/di/injection_container.dart 2>/dev/null \
+    || MISSING+=("lib/app/di/injection_container.dart with 'await sl.allReady();'")
+  grep -q 'abstract final class RouteNames {' lib/app/router/route_names.dart 2>/dev/null \
+    && grep -q 'abstract final class RoutePaths {' lib/app/router/route_names.dart \
+    || MISSING+=("lib/app/router/route_names.dart with RouteNames and RoutePaths classes")
+  [[ -f lib/app/router/app_router.dart ]] \
+    && perl -0ne 'exit(/\n    \],\n  \);\n\}\s*\z/ ? 0 : 1)' lib/app/router/app_router.dart \
+    || MISSING+=("lib/app/router/app_router.dart ending with the GoRouter routes list")
+fi
+if [[ ${#MISSING[@]} -gt 0 ]]; then
+  echo "error: this project doesn't match the app_core structure. Missing:" >&2
+  printf '  - %s\n' "${MISSING[@]}" >&2
+  [[ $WIRE -eq 1 ]] && echo "(DI/router items can be skipped with --no-wire)" >&2
+  exit 1
+fi
+
 pascal() { perl -pe 's/(^|_)([a-z0-9])/\U$2/g' <<<"$1"; }
 camel() { perl -pe 's/_([a-z0-9])/\U$1/g' <<<"$1"; }
 export PKG FEAT ENT
