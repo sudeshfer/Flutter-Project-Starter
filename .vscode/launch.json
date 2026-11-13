@@ -1,0 +1,141 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "dev (debug)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_dev.dart",
+      "args": [
+        "--flavor",
+        "dev",
+        "--dart-define-from-file",
+        "env/dev.json"
+      ],
+      "presentation": {
+        "group": "1. debug",
+        "order": 1
+      }
+    },
+    {
+      "name": "qa (debug)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_qa.dart",
+      "args": [
+        "--flavor",
+        "qa",
+        "--dart-define-from-file",
+        "env/qa.json"
+      ],
+      "presentation": {
+        "group": "1. debug",
+        "order": 2
+      }
+    },
+    {
+      "name": "staging (debug)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_staging.dart",
+      "args": [
+        "--flavor",
+        "staging",
+        "--dart-define-from-file",
+        "env/staging.json"
+      ],
+      "presentation": {
+        "group": "1. debug",
+        "order": 3
+      }
+    },
+    {
+      "name": "uat (debug)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_uat.dart",
+      "args": [
+        "--flavor",
+        "uat",
+        "--dart-define-from-file",
+        "env/uat.json"
+      ],
+      "presentation": {
+        "group": "1. debug",
+        "order": 4
+      }
+    },
+    {
+      "name": "prod (debug)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_prod.dart",
+      "args": [
+        "--flavor",
+        "prod",
+        "--dart-define-from-file",
+        "env/prod.json"
+      ],
+      "presentation": {
+        "group": "1. debug",
+        "order": 5
+      }
+    },
+    {
+      "name": "uat (profile)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "program": "lib/main_uat.dart",
+      "args": [
+        "--flavor",
+        "uat",
+        "--dart-define-from-file",
+        "env/uat.json"
+      ],
+      "presentation": {
+        "group": "2. profile (physical device)",
+        "order": 1
+      }
+    },
+    {
+      "name": "uat (release)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "program": "lib/main_uat.dart",
+      "args": [
+        "--flavor",
+        "uat",
+        "--dart-define-from-file",
+        "env/uat.json"
+      ],
+      "presentation": {
+        "group": "3. release (physical device on iOS)",
+        "order": 1
+      }
+    },
+    {
+      "name": "prod (release)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "program": "lib/main_prod.dart",
+      "args": [
+        "--flavor",
+        "prod",
+        "--dart-define-from-file",
+        "env/prod.json"
+      ],
+      "presentation": {
+        "group": "3. release (physical device on iOS)",
+        "order": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# Limits code generators to the folders that use them (faster builds).
+targets:
+  $default:
+    builders:
+      freezed:
+        generate_for:
+          include:
+            - lib/core/error/**.dart
+            - lib/features/*/domain/entities/**.dart
+            - lib/features/*/data/models/**.dart
+            - lib/features/*/presentation/bloc/**.dart
+            - lib/features/*/presentation/cubit/**.dart
+      json_serializable:
+        generate_for:
+          include:
+            - lib/features/*/data/models/**.dart
+        options:
+          explicit_to_json: true
+          field_rename: snake
+          checked: true
+      source_gen:combining_builder:
+        options:
+          ignore_for_file:
+            - type=lint

@@ -1,0 +1,5 @@
+// Flavor: prod — values shared by Debug-prod, Release-prod and Profile-prod.
+// Codename values: see docs/RENAMING.md.
+PRODUCT_BUNDLE_IDENTIFIER = com.example.appcore
+DISPLAY_NAME = App Core
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-prod

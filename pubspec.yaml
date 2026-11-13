@@ -1,0 +1,49 @@
+name: app_core
+description: "App Core — Flutter app foundation (final name TBD, see docs/RENAMING.md)."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.7
+
+dependencies:
+  bloc: ^9.2.1
+  bloc_concurrency: ^0.3.0
+  connectivity_plus: ^7.3.2
+  dio: ^5.11.1
+  equatable: ^3.0.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_localizations:
+    sdk: flutter
+  flutter_secure_storage: ^11.2.0
+  fpdart: ^1.2.0
+  freezed_annotation: ^3.1.0
+  get_it: ^9.3.0
+  go_router: ^18.1.3
+  intl: ^0.20.3
+  json_annotation: ^4.12.0
+  logger: ^2.8.0
+  shared_preferences: ^2.5.6
+
+dev_dependencies:
+  bloc_test: ^10.0.0
+  build_runner: ^2.16.1
+  flutter_launcher_icons: ^0.14.4
+  flutter_test:
+    sdk: flutter
+  freezed: ^4.0.1
+  integration_test:
+    sdk: flutter
+  json_serializable: ^6.15.2
+  mocktail: ^1.0.5
+  very_good_analysis: ^11.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/images/
+    - assets/icons/
+

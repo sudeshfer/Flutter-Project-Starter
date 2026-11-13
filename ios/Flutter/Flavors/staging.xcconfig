@@ -1,0 +1,5 @@
+// Flavor: staging — values shared by Debug-staging, Release-staging and Profile-staging.
+// Codename values: see docs/RENAMING.md.
+PRODUCT_BUNDLE_IDENTIFIER = com.example.appcore.stg
+DISPLAY_NAME = App Core STG
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-staging

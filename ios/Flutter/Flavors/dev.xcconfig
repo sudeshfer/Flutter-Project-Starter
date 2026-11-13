@@ -1,0 +1,5 @@
+// Flavor: dev — values shared by Debug-dev, Release-dev and Profile-dev.
+// Codename values: see docs/RENAMING.md.
+PRODUCT_BUNDLE_IDENTIFIER = com.example.appcore.dev
+DISPLAY_NAME = App Core DEV
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-dev

@@ -1,0 +1,27 @@
+{
+  "@@locale": "en",
+  "exampleTitle": "Examples",
+  "@exampleTitle": { "description": "Title of the example list page" },
+  "exampleItemCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "@exampleItemCount": {
+    "description": "Number of loaded example items",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "exampleEmpty": "Nothing here yet.",
+  "@exampleEmpty": { "description": "Empty state on the example page" },
+  "errorTitle": "Something went wrong",
+  "@errorTitle": { "description": "Generic error title" },
+  "retry": "Retry",
+  "@retry": { "description": "Retry button label" },
+  "loading": "Loading…",
+  "@loading": { "description": "Semantic label for loaders" },
+  "notFoundTitle": "Page not found",
+  "@notFoundTitle": { "description": "404 page title" },
+  "notFoundMessage": "We couldn't find {location}.",
+  "@notFoundMessage": {
+    "description": "404 page message",
+    "placeholders": { "location": { "type": "String" } }
+  },
+  "goHome": "Go to home",
+  "@goHome": { "description": "Button on the 404 page" }
+}

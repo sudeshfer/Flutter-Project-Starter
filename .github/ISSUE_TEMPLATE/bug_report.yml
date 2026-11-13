@@ -1,0 +1,61 @@
+name: Bug report
+description: Something isn't working
+title: "fix: "
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open …
+        2. Tap …
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: dropdown
+    id: flavor
+    attributes:
+      label: Flavor
+      options: [dev, qa, staging, uat, prod]
+    validations:
+      required: true
+  - type: input
+    id: build
+    attributes:
+      label: Build / version
+      description: App version and build number (Settings → About, or the store/TestFlight/Firebase build).
+      placeholder: 1.0.0+12 (qa)
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      multiple: true
+      options: [Android, iOS]
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device & OS version
+      placeholder: Pixel 8, Android 16 / iPhone 15, iOS 26.1
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      render: shell

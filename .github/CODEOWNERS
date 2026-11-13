@@ -1,0 +1,10 @@
+# Every PR requires a review from a code owner (enable "Require review from
+# Code Owners" in branch protection).
+# TODO: replace the placeholders with the two developers' GitHub usernames.
+*                       @DEVELOPER_ONE_USERNAME @DEVELOPER_TWO_USERNAME
+
+# Build, CI and platform config
+/.github/               @DEVELOPER_ONE_USERNAME @DEVELOPER_TWO_USERNAME
+/android/               @DEVELOPER_ONE_USERNAME @DEVELOPER_TWO_USERNAME
+/ios/                   @DEVELOPER_ONE_USERNAME @DEVELOPER_TWO_USERNAME
+/lib/core/              @DEVELOPER_ONE_USERNAME @DEVELOPER_TWO_USERNAME

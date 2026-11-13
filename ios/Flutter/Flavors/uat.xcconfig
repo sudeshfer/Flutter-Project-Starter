@@ -1,0 +1,5 @@
+// Flavor: uat — values shared by Debug-uat, Release-uat and Profile-uat.
+// Codename values: see docs/RENAMING.md.
+PRODUCT_BUNDLE_IDENTIFIER = com.example.appcore.uat
+DISPLAY_NAME = App Core UAT
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-uat
